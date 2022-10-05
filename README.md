@@ -45,10 +45,8 @@ To include this new app in your django app, you need to go the `settings.py` fol
 ```
 # settings.py
 
-...
-
 INSTALLED_APPS = [
-    ... ,
+    ...
     "APP_NAME",
 ]
 
@@ -79,13 +77,17 @@ A REST API is a standardized way to provide data to other applications. Those ap
 
 There are a few key options for a REST API request:
 
-GET — The most common option, returns some data from the API based on the endpoint you visit and any parameters you provide
-POST — Creates a new record that gets appended to the database
-PUT — Looks for a record at the given URI you provide. If it exists, update the existing record. If not, create a new record
-DELETE — Deletes the record at the given URI
-PATCH — Update individual fields of a record
+- GET — The most common option, returns some data from the API based on the endpoint you visit and any parameters you provide
+- POST — Creates a new record that gets appended to the database
+- PUT — Looks for a record at the given URI you provide. If it exists, update the existing record. If not, create a new record
+- DELETE — Deletes the record at the given URI
+- PATCH — Update individual fields of a record
 
 #### Serialize the model
+
+Serializers allow complex data such as querysets and model instances to be converted to native datatypes that can then be easily rendered into JSON, XML or other content types.
+
+The serializer below will parse the queryset and return a JSON content with specific parameters for each object. These parameters are 'some_string', 'some_integer', and 'some_date'.
 
 ```
 # APP_NAME/serializers.py
@@ -105,8 +107,9 @@ class ExampleModelSerializer(serializers.HyperlinkedModelSerializer):
 ```
 
 #### Create views for your API
+A view function, or view for short, is a Python function that takes a web request and returns a web response. This response can be the HTML contents of a web page, or a redirect, or a 404 error, or an XML document, or a data queryset.
 
-We need to render each ExampleModel objects in JSON format.
+For example, Let's assume we need to render each ExampleModel objects in JSON format.
 
 To do so, we need to:
 
