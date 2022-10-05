@@ -38,9 +38,21 @@ OR
 $ django-admin startapp APP_NAME
 ```
 
-This will create a django application. Now you will a newly-created folder called APP_NAME. This folder will include everything that associates with your new application.
+This will create a django application. Now you will see a newly-created folder called APP_NAME. This folder will include everything that associates with your new application.
 
-To include this new app in your django app, you need to go the `settings.py` folder. Then, you need to add your newly-created app as "APP_NAME" to the INSTALLED_APPS array defined in `settings.py` folder.
+To include this new app in your django app, you need to go the `settings.py` folder. Then, you need to add your newly-created app as `"APP_NAME"` to the `INSTALLED_APPS` array defined in `settings.py` folder.
+
+```
+# settings.py
+
+...
+
+INSTALLED_APPS = [
+    ... ,
+    "APP_NAME",
+]
+
+```
 
 ### How to Create a Model in Django ?
 
