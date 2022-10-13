@@ -1,29 +1,38 @@
 from django.db import models
+from django.conf import settings
+from django.contrib.sites.models import Site
 
 # Create your models here.
 
 class Satellite(models.Model):
     # Satellite Image infomation
-    IMAGE_TYPE_COHICES = [
-        ('1', 'Type 1'),
-        ('2', 'Type 2'),
-        ('3', 'Type 3'),
+    SATALLITE_TYPE_CHOICES = [
+        ('15', 'NOAA 15'),
+        ('18', 'NOAA 18'),
+        ('19', 'NOAA 19'),
     ]
-    image = models.ImageField()
-    imageType = models.CharField(
-        max_length=1,
-        choices=IMAGE_TYPE_COHICES,
-        default='1',
+    # image = models.URLField(max_length=500) # Image by URL
+    image = models.ImageField(blank=False, null=False,
+                              upload_to='satellite/')  # Image by uploading
+    satelliteID = models.CharField(
+        max_length=2,
+        choices=SATALLITE_TYPE_CHOICES,
+        default='15',
+        blank=False,
+        null=False,
     )
 
-    # Location stored as string
-    city = models.CharField(blank=True, null=True)
-    state = models.CharField(blank=True, null=True)
-    country = models.CharField(blank=True, null=True)
-
-    # Location stored as coordinates
-    longitude = models.DecimalField(max_digits=9, decimal_places=6)
-    latitude = models.DecimalField(max_digits=8, decimal_places=6)
-
     # Image time stamp.
-    timeStamp = models.DateTimeField()
+    # auto_now_add=True: takes the instant datetime when a satellite obj is created
+    timeStamp = models.DateTimeField(auto_now_add=True)
+
+    # Creates image path. As: localhost:8000/[image_url]
+    def get_image(self):
+        if self.image:
+            return Site.objects.get_current().domain + self.image.url
+        else:
+            return ""
+
+    # Define display name of an object in the Django admin site.
+    def __str__(self):
+        return f'{self.get_satelliteID_display()} ({self.timeStamp})'

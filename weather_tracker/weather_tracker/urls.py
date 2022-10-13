@@ -14,8 +14,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # Below is our new app
+    path('satellite/', include('satellite.urls')),
 ]
+
+# API ENDPOINTS:
+# "localhost:8000/admin"
+# "localhost:8000/satellite"
+
+# Below code defines paths for static and media files.
+if settings.STATIC_URL:
+    urlpatterns += static(settings.STATIC_URL,
+                          document_root=settings.STATIC_ROOT)
+if settings.MEDIA_URL:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
