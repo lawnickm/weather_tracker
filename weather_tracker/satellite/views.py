@@ -9,9 +9,11 @@ from .models import Satellite
 def renderUI(request):
     return render(request, 'satellite/index.html')
     
+# satellite/list
 class SatelliteListAPI(generics.ListAPIView):
     serializer_class = SatelliteSerializer
     queryset = Satellite.objects.all()
 
+# satellite/create
 class SatelliteCreateAPI(generics.CreateAPIView):
     serializer_class = SatelliteSerializer
