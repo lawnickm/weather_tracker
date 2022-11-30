@@ -29,7 +29,7 @@ class Satellite(models.Model):
     # Creates image path. As: localhost:8000/[image_url]
     def get_image(self):
         if self.image:
-            return "https://weather-tracker-pdwt-main-pgmcdrxw5a-wm.a.run.app/" + self.image.url
+            return "https://weather-tracker-pdwt-main-pgmcdrxw5a-wm.a.run.app" + self.image.url
         else:
             return ""
 
