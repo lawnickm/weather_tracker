@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     # REQUIRED APPS BELOW
     'django.contrib.sites',
     'rest_framework',
+    'corsheaders',
     # CUSTOM APPS BELOW
     'satellite',
 ]
@@ -57,9 +58,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'weather_tracker.urls'
+CORS_ORIGIN_ALLOW_ALL = True
 
 TEMPLATES = [
     {
