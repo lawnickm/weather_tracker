@@ -32,6 +32,7 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 CORS_ORIGIN_ALLOW_ALL = True
 
+CSRF_TRUSTED_ORIGINS=['*'] # '*' is for development. Add your Public IP or domain on production stage.
 # Application definition
 
 INSTALLED_APPS = [
@@ -49,7 +50,9 @@ INSTALLED_APPS = [
     'satellite',
 ]
 
-SITE_ID = 1 # ID of Site. localhost:8000
+SITE_ID = 1 # Site id for database table.
+            # If the database creates a sample table, that table will take to '1' as site id.
+            # Best solution: Connect to your database, check all tables and Site ID information.
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -87,11 +90,16 @@ WSGI_APPLICATION = 'weather_tracker.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+  'default': {
+        'ENGINE': '<django.db.backends.postgresql>',
+        'NAME': '<db_name>',
+        'USER': '<user_name>',
+        'PASSWORD': 'password',
+        'HOST': '<host_link>',
+        'PORT': '<port_number>',
+ }
 }
 
 # Password validation
